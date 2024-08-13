@@ -325,8 +325,8 @@ class _AddVisitFormState extends State<AddVisitForm> {
                     ),
                   ),
                   Positioned(
-                    top: 165,
-                    right: 120,
+                    top: 135,
+                    right: 86,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -335,7 +335,7 @@ class _AddVisitFormState extends State<AddVisitForm> {
                               .now()),
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 14,
+                            fontSize: 10,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -343,7 +343,7 @@ class _AddVisitFormState extends State<AddVisitForm> {
                           _coordinates,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 14,
+                            fontSize: 10,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -351,7 +351,7 @@ class _AddVisitFormState extends State<AddVisitForm> {
                           _jalan,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 14,
+                            fontSize: 10,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -359,7 +359,7 @@ class _AddVisitFormState extends State<AddVisitForm> {
                           _kecamatan,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 14,
+                            fontSize: 10,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -367,7 +367,7 @@ class _AddVisitFormState extends State<AddVisitForm> {
                           _kabupaten,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 14,
+                            fontSize: 10,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -375,7 +375,7 @@ class _AddVisitFormState extends State<AddVisitForm> {
                           _provinsi,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 14,
+                            fontSize: 10,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -384,7 +384,7 @@ class _AddVisitFormState extends State<AddVisitForm> {
                   ),
                   Positioned(
                     bottom: 0,
-                    left: 118,
+                    left: 86,
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.18,
                       height: MediaQuery.of(context).size.height * 0.1,
@@ -401,7 +401,7 @@ class _AddVisitFormState extends State<AddVisitForm> {
                           ),
                           children: [
                             TileLayer(
-                              urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                              urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                               subdomains: ['a', 'b', 'c'],
                             ),
                             MarkerLayer(
