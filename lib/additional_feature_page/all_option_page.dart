@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import '../additional_feature_function/all_option_function.dart';
 
-class AllOptionPage extends StatelessWidget {
+class AllOptionPage extends StatefulWidget {
   const AllOptionPage({super.key});
+
+  @override
+  _AllOptionPageState createState() => _AllOptionPageState();
+}
+
+class _AllOptionPageState extends State<AllOptionPage> {
+  String _searchQuery = '';
 
   Future<void> _handleRefresh() async {
     // Implementasi fungsi refresh di sini
@@ -19,11 +26,17 @@ class AllOptionPage extends StatelessWidget {
           onRefresh: _handleRefresh,
           child: ListView(
             children: [
-              SizedBox(height: 20,),
-              AllOptionFunctions.buildSearchBar(),
-              SizedBox(height: 20,),
-              AllOptionFunctions.buildAdditionalSection(context),
-              SizedBox(height: 500,)
+              const SizedBox(height: 20,),
+              AllOptionFunctions.buildSearchBar(
+                  onChanged: (String value) {
+                    setState(() {
+                      _searchQuery = value;
+                    });
+                  }
+              ),
+              const SizedBox(height: 20,),
+              AllOptionFunctions.buildAdditionalSection(context, _searchQuery),
+              const SizedBox(height: 500,),
             ],
           ),
         ),
