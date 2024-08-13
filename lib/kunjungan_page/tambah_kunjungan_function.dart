@@ -314,19 +314,13 @@ class _AddVisitFormState extends State<AddVisitForm> {
                     fit: BoxFit.cover,
                     child: Image.file(
                       _image!,
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,
-                      height: MediaQuery
-                          .of(context)
-                          .size
-                          .height * 0.3,
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height * 0.3,
                     ),
                   ),
                   Positioned(
-                    top: 135,
-                    right: 86,
+                    bottom: 0,
+                    right: 120,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -384,7 +378,7 @@ class _AddVisitFormState extends State<AddVisitForm> {
                   ),
                   Positioned(
                     bottom: 0,
-                    left: 86,
+                    left: 118,
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.18,
                       height: MediaQuery.of(context).size.height * 0.1,
