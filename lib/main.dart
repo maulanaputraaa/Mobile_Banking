@@ -6,13 +6,13 @@ void main() {
   runApp(const MyApp());
 }
 
+/// Widget utama aplikasi
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // Meminta izin saat aplikasi dimulai
+    // Meminta izin yang diperlukan
     _requestPermissions();
 
     return MaterialApp(
@@ -26,15 +26,21 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  // Metode untuk meminta izin
+  /// Metode untuk meminta izin yang diperlukan oleh aplikasi
   Future<void> _requestPermissions() async {
-    // Minta izin untuk lokasi
+    // Meminta izin untuk akses lokasi
     if (await Permission.location.isDenied) {
       await Permission.location.request();
     }
-    // Minta izin untuk penyimpanan
+
+    // Meminta izin untuk akses penyimpanan
     if (await Permission.storage.isDenied) {
       await Permission.storage.request();
+    }
+
+    // Meminta izin untuk akses kamera
+    if (await Permission.camera.isDenied) {
+      await Permission.camera.request();
     }
   }
 }

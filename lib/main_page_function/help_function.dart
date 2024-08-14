@@ -26,7 +26,7 @@ PreferredSizeWidget buildAppBar(BuildContext context) {
   return PreferredSize(
     preferredSize: Size.fromHeight(appBarHeight),
     child: ClipRRect(
-      borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+      borderRadius: const BorderRadius.vertical(bottom: Radius.circular(20)),
       child: AppBar(
         automaticallyImplyLeading: false,
         title: Padding(
@@ -43,7 +43,7 @@ PreferredSizeWidget buildAppBar(BuildContext context) {
                   Shadow(
                     blurRadius: 2.0,
                     color: Colors.black.withOpacity(0.5),
-                    offset: Offset(1.0, 1.0),
+                    offset: const Offset(1.0, 1.0),
                   ),
                 ],
               ),
@@ -52,7 +52,7 @@ PreferredSizeWidget buildAppBar(BuildContext context) {
         ),
         elevation: 4, // Menambahkan bayangan pada AppBar
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [Colors.blueAccent, Colors.blueAccent],
               begin: Alignment.topLeft,
@@ -73,7 +73,7 @@ PreferredSizeWidget buildAppBar(BuildContext context) {
                   Shadow(
                     blurRadius: 2.0,
                     color: Colors.black.withOpacity(0.5),
-                    offset: Offset(1.0, 1.0),
+                    offset: const Offset(1.0, 1.0),
                   ),
                 ],
               ),
@@ -88,11 +88,12 @@ PreferredSizeWidget buildAppBar(BuildContext context) {
   );
 }
 
+//Widget Untuk Bantuan
 class HelpFunctions {
   static Widget buildProfileHeader() {
     return Container(
-      padding: EdgeInsets.all(16),
-      child: Row(
+      padding: const EdgeInsets.all(16),
+      child: const Row(
       ),
     );
   }
@@ -104,14 +105,14 @@ class HelpFunctions {
       child: TextField(
         decoration: InputDecoration(
           hintText: 'Cari',
-          prefixIcon: Icon(Icons.search),
+          prefixIcon: const Icon(Icons.search),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.0),
             borderSide: BorderSide.none,
           ),
           filled: true,
           fillColor: Colors.grey[200],
-          contentPadding: EdgeInsets.symmetric(vertical: 0.0),
+          contentPadding: const EdgeInsets.symmetric(vertical: 0.0),
         ),
         onChanged: (query) {
           // Handle search query change
@@ -133,7 +134,7 @@ class HelpFunctions {
         buildSettingItem('Transfer', '', true),
         buildSettingItem('Deposito', '', true),
         buildSettingItem('Pembukaan Tabungan', '', true),
-        buildSettingItem('Akun dan Keamana', '', true),
+        buildSettingItem('Akun dan Keamanan', '', true),
         buildSettingItem('Ivestasi', '', true),
       ],
     );
@@ -146,8 +147,8 @@ class HelpFunctions {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (value.isNotEmpty) Text(
-              value, style: TextStyle(color: Colors.grey)),
-          if (showArrow) Icon(Icons.arrow_forward_ios, size: 16),
+              value, style: const TextStyle(color: Colors.grey)),
+          if (showArrow) const Icon(Icons.arrow_forward_ios, size: 16),
         ],
       ),
       onTap: () {

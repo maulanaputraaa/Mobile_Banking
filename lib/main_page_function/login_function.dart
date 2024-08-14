@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import '../main_page/home_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import '../main_page/home_page.dart';
 import '../main_page/sign_up_page.dart';
 
+/// Layanan autentikasi biometrik
 class AuthService {
   final LocalAuthentication auth = LocalAuthentication();
 
+  /// Mengautentikasi pengguna menggunakan biometrik (sidik jari)
   Future<bool> authenticateWithBiometrics() async {
     try {
+      // Memeriksa apakah biometrik dapat diperiksa
       bool canCheckBiometrics = await auth.canCheckBiometrics;
       bool canAuthenticate = canCheckBiometrics || await auth.isDeviceSupported();
 
@@ -17,6 +20,7 @@ class AuthService {
         return false;
       }
 
+      // Melakukan autentikasi biometrik
       bool authenticated = await auth.authenticate(
         localizedReason: 'Scan your fingerprint to authenticate',
         options: const AuthenticationOptions(
@@ -32,12 +36,14 @@ class AuthService {
     }
   }
 
+  /// Memeriksa apakah perangkat mendukung biometrik
   Future<bool> checkBiometrics() async {
     bool canCheckBiometrics = await auth.canCheckBiometrics;
     return canCheckBiometrics;
   }
 }
 
+/// Widget header yang menampilkan gambar
 Widget header(BuildContext context) {
   return Container(
     width: 180,
@@ -50,15 +56,16 @@ Widget header(BuildContext context) {
   );
 }
 
+/// Widget untuk field password dengan kemampuan untuk menampilkan/menyembunyikan password
 class PasswordField extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
 
   const PasswordField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.hintText,
-  }) : super(key: key);
+  });
 
   @override
   _PasswordFieldState createState() => _PasswordFieldState();
@@ -67,6 +74,7 @@ class PasswordField extends StatefulWidget {
 class _PasswordFieldState extends State<PasswordField> {
   bool _obscurePassword = true;
 
+  /// Mengubah visibilitas password
   void _togglePasswordVisibility() {
     setState(() {
       _obscurePassword = !_obscurePassword;
@@ -116,6 +124,7 @@ class _PasswordFieldState extends State<PasswordField> {
   }
 }
 
+/// Widget untuk input email dan password
 Widget inputField(BuildContext context, TextEditingController emailController, TextEditingController passwordController) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -160,6 +169,7 @@ Widget inputField(BuildContext context, TextEditingController emailController, T
   );
 }
 
+/// Widget untuk tombol login
 Widget loginButton(BuildContext context, TextEditingController emailController, TextEditingController passwordController, String validEmail, String validPassword) {
   return ConstrainedBox(
     constraints: BoxConstraints(
@@ -191,6 +201,11 @@ Widget loginButton(BuildContext context, TextEditingController emailController, 
           );
         }
       },
+      style: ElevatedButton.styleFrom(
+        shape: const StadiumBorder(),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        backgroundColor: Colors.lightGreenAccent,
+      ),
       child: const Text(
         "LOGIN",
         style: TextStyle(
@@ -199,15 +214,11 @@ Widget loginButton(BuildContext context, TextEditingController emailController, 
           fontWeight: FontWeight.bold,
         ),
       ),
-      style: ElevatedButton.styleFrom(
-        shape: const StadiumBorder(),
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        backgroundColor: Colors.lightGreenAccent,
-      ),
     ),
   );
 }
 
+/// Widget untuk tombol autentikasi sidik jari
 Widget fingerprintButton(BuildContext context) {
   final AuthService authService = AuthService();
 
@@ -237,16 +248,17 @@ Widget fingerprintButton(BuildContext context) {
         );
       }
     },
-    child: const Icon(Icons.fingerprint, size: 50),
     style: ElevatedButton.styleFrom(
       shape: const CircleBorder(),
       padding: const EdgeInsets.all(10),
       backgroundColor: Colors.blue,
       foregroundColor: Colors.white,
     ),
+    child: const Icon(Icons.fingerprint, size: 50),
   );
 }
 
+/// Widget untuk kombinasi login dan autentikasi
 Widget loginAuth(BuildContext context, TextEditingController emailController, TextEditingController passwordController, String validEmail, String validPassword) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -260,6 +272,7 @@ Widget loginAuth(BuildContext context, TextEditingController emailController, Te
   );
 }
 
+/// Widget untuk navigasi ke halaman pendaftaran
 Widget signUp(BuildContext context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -268,7 +281,7 @@ Widget signUp(BuildContext context) {
       TextButton(
         onPressed: () {
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => SignUpPage()),
+            MaterialPageRoute(builder: (context) => const SignUpPage()),
           );
         },
         child: const Text(

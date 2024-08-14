@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../main_page/login_page.dart';
 
+/// Widget untuk menampilkan header
 Widget header(BuildContext context) {
   return Container(
     width: 180,
@@ -13,6 +14,7 @@ Widget header(BuildContext context) {
   );
 }
 
+/// Widget untuk menampilkan field input (Email, Password, Konfirmasi Password)
 Widget inputFields(
     BuildContext context,
     TextEditingController emailController,
@@ -21,12 +23,12 @@ Widget inputFields(
     bool showPassword,
     bool showConfirmPassword,
     VoidCallback togglePasswordVisibility,
-    VoidCallback toggleConfirmPasswordVisibility
+    VoidCallback toggleConfirmPasswordVisibility,
     ) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      // Email TextField
+      // Field Email
       Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -60,7 +62,7 @@ Widget inputFields(
       ),
       const SizedBox(height: 20),
 
-      // Password TextField
+      // Field Password
       Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -101,7 +103,7 @@ Widget inputFields(
       ),
       const SizedBox(height: 20),
 
-      // Confirm Password TextField
+      // Field Konfirmasi Password
       Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -144,6 +146,7 @@ Widget inputFields(
   );
 }
 
+/// Widget untuk tombol Daftar
 Widget signUpButton(
     BuildContext context,
     TextEditingController emailController,
@@ -152,10 +155,10 @@ Widget signUpButton(
     void Function() onRegisterPressed,
     ) {
   return ElevatedButton(
-    onPressed: onRegisterPressed, // Hanya panggil onRegisterPressed tanpa navigasi langsung
+    onPressed: onRegisterPressed, // Memanggil fungsi onRegisterPressed
     style: ElevatedButton.styleFrom(
       foregroundColor: Colors.white,
-      backgroundColor: Colors.green, // Warna teks tombol
+      backgroundColor: Colors.green, // Warna latar belakang tombol
       padding: const EdgeInsets.symmetric(vertical: 15),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
@@ -171,6 +174,7 @@ Widget signUpButton(
   );
 }
 
+/// Widget untuk menampilkan tautan Masuk
 Widget signIn(BuildContext context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,

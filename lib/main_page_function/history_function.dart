@@ -7,6 +7,7 @@ import '../main_page/history_page.dart';
 import '../main_page/home_page.dart';
 import '../screen/animate_page.dart';
 
+//Widget Untuk AppBar
 PreferredSizeWidget buildAppBar(BuildContext context, {VoidCallback? onCalendarIconPressed}) {
   final mediaQuery = MediaQuery.of(context);
   final bool isPortrait = mediaQuery.orientation == Orientation.portrait;
@@ -24,7 +25,7 @@ PreferredSizeWidget buildAppBar(BuildContext context, {VoidCallback? onCalendarI
   return PreferredSize(
     preferredSize: Size.fromHeight(appBarHeight),
     child: ClipRRect(
-      borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+      borderRadius: const BorderRadius.vertical(bottom: Radius.circular(20)),
       child: AppBar(
         automaticallyImplyLeading: false,
         title: Padding(
@@ -41,7 +42,7 @@ PreferredSizeWidget buildAppBar(BuildContext context, {VoidCallback? onCalendarI
                   Shadow(
                     blurRadius: 2.0,
                     color: Colors.black.withOpacity(0.5),
-                    offset: Offset(1.0, 1.0),
+                    offset: const Offset(1.0, 1.0),
                   ),
                 ],
               ),
@@ -50,7 +51,7 @@ PreferredSizeWidget buildAppBar(BuildContext context, {VoidCallback? onCalendarI
         ),
         elevation: 4,
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [Colors.blueAccent, Colors.blueAccent],
               begin: Alignment.topLeft,
@@ -70,7 +71,7 @@ PreferredSizeWidget buildAppBar(BuildContext context, {VoidCallback? onCalendarI
                   Shadow(
                     blurRadius: 2.0,
                     color: Colors.black.withOpacity(0.5),
-                    offset: Offset(1.0, 1.0),
+                    offset: const Offset(1.0, 1.0),
                   ),
                 ],
               ),
@@ -83,8 +84,9 @@ PreferredSizeWidget buildAppBar(BuildContext context, {VoidCallback? onCalendarI
   );
 }
 
+//Fungsi Untuk Data Transaksi Dummy
 Future<List<Map<String, String>>> fetchTransactions({DateTimeRange? dateRange}) async {
-  await Future.delayed(Duration(seconds: 2)); // Simulasi delay
+  await Future.delayed(const Duration(seconds: 2)); // Simulasi delay
   final random = Random();
   final startDate = DateTime(2000, 1, 1);
   final totalDays = DateTime.now().difference(startDate).inDays;
@@ -95,7 +97,7 @@ Future<List<Map<String, String>>> fetchTransactions({DateTimeRange? dateRange}) 
 
     final isNegative = random.nextBool();
     final randomAmountFactor = (date.millisecondsSinceEpoch % 1000) + 100;
-    final amount = '${isNegative ? '-' : '+'}Rp.${randomAmountFactor}.000';
+    final amount = '${isNegative ? '-' : '+'}Rp.$randomAmountFactor.000';
 
     final description = isNegative ? 'Pengeluaran' : 'Pemasukan';
 
@@ -134,16 +136,19 @@ Future<List<Map<String, String>>> fetchTransactions({DateTimeRange? dateRange}) 
   return transactions;
 }
 
+//Fungsi Untuk Mengambil data
 Future<void> loadInitialData(Function(List<Map<String, String>>) onDataLoaded, DateTimeRange? dateRange) async {
   final transactions = await fetchTransactions(dateRange: dateRange);
   onDataLoaded(transactions);
 }
 
+//Fungsi Untuk Real Time Refresh
 Future<void> handleRefresh(Function(List<Map<String, String>>) onDataLoaded, DateTimeRange? dateRange) async {
   final transactions = await fetchTransactions(dateRange: dateRange);
   onDataLoaded(transactions);
 }
 
+//Fungsi Untuk Melakukan Filter Riwayat
 Future<void> selectDateRange(
     BuildContext context,
     DateTimeRange? currentDateRange,
@@ -157,7 +162,7 @@ Future<void> selectDateRange(
     firstDate: farPastDate,
     lastDate: now,
     initialDateRange: currentDateRange ?? DateTimeRange(
-      start: now.subtract(Duration(days: 365)),
+      start: now.subtract(const Duration(days: 365)),
       end: now,
     ),
   );
@@ -167,6 +172,7 @@ Future<void> selectDateRange(
   }
 }
 
+//Widget Untuk Transaksi
 Widget buildTransactionList(List<Map<String, String>> transactions) {
   return ListView.builder(
     itemCount: transactions.length,
