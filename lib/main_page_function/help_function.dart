@@ -283,9 +283,9 @@ Widget buildIconWithLabel(BuildContext context, {required IconData icon, require
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 28, color: Colors.white),
-        const SizedBox(height: 4),
-        Text(label, style: const TextStyle(color: Colors.white, fontSize: 12)),
+        Icon(icon, size: 22, color: Colors.white),
+        const SizedBox(height: 0),
+        Text(label, style: const TextStyle(color: Colors.white, fontSize: 11)),
       ],
     ),
   );
