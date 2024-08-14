@@ -446,7 +446,6 @@ Widget buildSingleFeatureContainer(BuildContext context) {
               label: 'Voucher',
               iconSize: iconSize,
               onTap: () {
-
               },)),
             SizedBox(width: paddingValue / 2),
             Expanded(child: SingleFeature(
