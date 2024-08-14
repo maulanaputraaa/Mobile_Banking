@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
@@ -15,6 +14,7 @@ import '../main_page/history_page.dart';
 import '../main_page/home_page.dart';
 import '../screen/animate_page.dart';
 
+//Widget Untuk AppBar
 PreferredSizeWidget buildAppBar(BuildContext context) {
   final mediaQuery = MediaQuery.of(context);
   final bool isPortrait = mediaQuery.orientation == Orientation.portrait;
@@ -99,7 +99,7 @@ PreferredSizeWidget buildAppBar(BuildContext context) {
   );
 }
 
-
+//Widget Untuk Menambah Laporan Kunjungan
 class AddVisitForm extends StatefulWidget {
   @override
   _AddVisitFormState createState() => _AddVisitFormState();
@@ -155,25 +155,6 @@ class _AddVisitFormState extends State<AddVisitForm> {
         TextPosition(offset: text.length),
       ),
     );
-  }
-
-  Future<void> requestStoragePermission() async {
-    var status = await Permission.storage.status;
-
-    if (status.isDenied || status.isPermanentlyDenied) {
-      status = await Permission.storage.request();
-    }
-
-    if (status.isGranted) {
-      // Izin diberikan, lanjutkan penyimpanan gambar
-    } else {
-      Fluttertoast.showToast(
-        msg: 'Izin penyimpanan masih ditolak!',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        backgroundColor: Colors.red,
-      );
-    }
   }
 
   Future<void> _pickImage() async {
@@ -308,19 +289,24 @@ class _AddVisitFormState extends State<AddVisitForm> {
                   SizedBox(height: 40),
                 ],
               )
+              //Contanier Untuk Menampilkan Foto dan Watermark Lokasi
                   : Stack(
                 children: [
-                  FittedBox(
-                    fit: BoxFit.cover,
-                    child: Image.file(
-                      _image!,
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height * 0.3,
+                  ClipRect(
+                    child: Align(
+                      alignment: Alignment.center,
+                      heightFactor: 0.7,
+                      child: Image.file(
+                        _image!,
+                        width: MediaQuery.of(context).size.width,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
+
                   Positioned(
                     bottom: 0,
-                    right: 120,
+                    right: 0,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -329,7 +315,7 @@ class _AddVisitFormState extends State<AddVisitForm> {
                               .now()),
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 10,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -337,7 +323,7 @@ class _AddVisitFormState extends State<AddVisitForm> {
                           _coordinates,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 10,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -345,7 +331,7 @@ class _AddVisitFormState extends State<AddVisitForm> {
                           _jalan,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 10,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -353,7 +339,7 @@ class _AddVisitFormState extends State<AddVisitForm> {
                           _kecamatan,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 10,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -361,7 +347,7 @@ class _AddVisitFormState extends State<AddVisitForm> {
                           _kabupaten,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 10,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -369,18 +355,19 @@ class _AddVisitFormState extends State<AddVisitForm> {
                           _provinsi,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 10,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
                     ),
                   ),
+                  //Container Untuk Menampilkan Lokasi Dengan Maps
                   Positioned(
                     bottom: 0,
-                    left: 118,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.18,
+                    left: 0,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.2,
                       height: MediaQuery.of(context).size.height * 0.1,
                       child: Opacity(
                         opacity: 0.7,
@@ -396,7 +383,7 @@ class _AddVisitFormState extends State<AddVisitForm> {
                           children: [
                             TileLayer(
                               urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-                              subdomains: ['a', 'b', 'c'],
+                              subdomains: const ['a', 'b', 'c'],
                             ),
                             MarkerLayer(
                               markers: [
@@ -422,6 +409,7 @@ class _AddVisitFormState extends State<AddVisitForm> {
             ),
           ),
           const SizedBox(height: 20),
+          //Tombol Untuk Kirim Laporan Kunjungan
           Center(
             child: ElevatedButton(
               onPressed: _submitReport,
@@ -439,110 +427,137 @@ class _AddVisitFormState extends State<AddVisitForm> {
     );
   }
 }
-  Widget buildBottomAppBar(BuildContext context) {
-    final screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
 
-    return Stack(
-      clipBehavior: Clip.none,
-      alignment: Alignment.topCenter,
+// Widget Untuk BottomAppBar
+Widget buildBottomAppBar(BuildContext context) {
+  final screenWidth = MediaQuery.of(context).size.width;
+
+  return Stack(
+    clipBehavior: Clip.none,
+    alignment: Alignment.topCenter,
+    children: [
+      Container(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(30.0),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.4),
+              spreadRadius: 0,
+              blurRadius: 10,
+              offset: const Offset(0, -5),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(30.0),
+          ),
+          child: Container(
+            height: 60.0,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.blue.shade700, Colors.blue.shade500],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+            ),
+            child: BottomAppBar(
+              color: Colors.transparent,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Tombol Home
+                  buildIconWithLabel(
+                    context,
+                    icon: Icons.home,
+                    label: 'Home',
+                    onTap: () {
+                      Navigator.of(context).push(NoAnimationPageRoute(
+                        page: HomePage(),
+                      ));
+                    },
+                  ),
+                  // Tombol Riwayat
+                  buildIconWithLabel(
+                    context,
+                    icon: Icons.history,
+                    label: 'Riwayat',
+                    onTap: () {
+                      Navigator.of(context).push(NoAnimationPageRoute(
+                        page: HistoryPage(),
+                      ));
+                    },
+                  ),
+                  SizedBox(width: screenWidth * 0.15),
+                  // Tombol Bantuan
+                  buildIconWithLabel(
+                    context,
+                    icon: Icons.help_outline,
+                    label: 'Bantuan',
+                    onTap: () {
+                      Navigator.of(context).push(NoAnimationPageRoute(
+                        page: const HelpPage(),
+                      ));
+                    },
+                  ),
+                  // Tombol User
+                  buildIconWithLabel(
+                    context,
+                    icon: Icons.person_outline,
+                    label: 'Akun',
+                    onTap: () {
+                      Navigator.of(context).push(NoAnimationPageRoute(
+                        page: const AccountPage(),
+                      ));
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+      // Tombol Untuk Floating Button QR Code
+      Positioned(
+        top: -20,
+        left: (screenWidth - 70) / 2,
+        child: SizedBox(
+          width: 70,
+          height: 70,
+          child: FloatingActionButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const ScanQRPage(),
+              ));
+            },
+            backgroundColor: Colors.white,
+            elevation: 5,
+            shape: const CircleBorder(),
+            child: const Icon(
+              Icons.qr_code_scanner,
+              color: Colors.lightBlueAccent,
+              size: 40,
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+// Fungsi untuk membuat Icon dengan Label di bawahnya
+Widget buildIconWithLabel(BuildContext context, {required IconData icon, required String label, required VoidCallback onTap}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(30.0)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.4),
-                spreadRadius: 0,
-                blurRadius: 10,
-                offset: const Offset(0, -5),
-              ),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(30.0)),
-            child: Container(
-              height: 60.0,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.blue.shade700, Colors.blue.shade500],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ),
-              ),
-              child: BottomAppBar(
-                color: Colors.transparent,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                      icon: const Icon(
-                          Icons.home, size: 28, color: Colors.white),
-                      onPressed: () {
-                        Navigator.of(context).push(NoAnimationPageRoute(
-                          page: HomePage(),
-                        ));
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                          Icons.history, size: 28, color: Colors.white),
-                      onPressed: () {
-                        Navigator.of(context).push(NoAnimationPageRoute(
-                          page: HistoryPage(),
-                        ));
-                      },
-                    ),
-                    SizedBox(width: screenWidth * 0.15),
-                    IconButton(
-                      icon: const Icon(
-                          Icons.help_outline, size: 28, color: Colors.white),
-                      onPressed: () {
-                        Navigator.of(context).push(NoAnimationPageRoute(
-                          page: const HelpPage(),
-                        ));
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                          Icons.person_outline, size: 28, color: Colors.white),
-                      onPressed: () {
-                        Navigator.of(context).push(NoAnimationPageRoute(
-                          page: const AccountPage(),
-                        ));
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        Positioned(
-          top: -20,
-          left: (screenWidth - 70) / 2,
-          child: SizedBox(
-            width: 70,
-            height: 70,
-            child: FloatingActionButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const ScanQRPage(),
-                ));
-              },
-              backgroundColor: Colors.white,
-              elevation: 5,
-              shape: const CircleBorder(),
-              child: const Icon(
-                  Icons.qr_code_scanner, color: Colors.lightBlueAccent,
-                  size: 40),
-            ),
-          ),
-        ),
+        Icon(icon, size: 22, color: Colors.white),
+        const SizedBox(height: 0),
+        Text(label, style: const TextStyle(color: Colors.white, fontSize: 11)),
       ],
-    );
-  }
+    ),
+  );
+}

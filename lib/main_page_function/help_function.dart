@@ -157,7 +157,7 @@ class HelpFunctions {
   }
 }
 
-// Fungsi untuk membangun BottomAppBar
+// Widget Untuk BottomAppBar
 Widget buildBottomAppBar(BuildContext context) {
   final screenWidth = MediaQuery.of(context).size.width;
 
@@ -167,18 +167,22 @@ Widget buildBottomAppBar(BuildContext context) {
     children: [
       Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(30.0)),
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(30.0),
+          ),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.4),
               spreadRadius: 0,
               blurRadius: 10,
-              offset: Offset(0, -5),
+              offset: const Offset(0, -5),
             ),
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(30.0)),
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(30.0),
+          ),
           child: Container(
             height: 60.0,
             decoration: BoxDecoration(
@@ -193,36 +197,48 @@ Widget buildBottomAppBar(BuildContext context) {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.home, size: 28, color: Colors.white),
-                    onPressed: () {
+                  // Tombol Home
+                  buildIconWithLabel(
+                    context,
+                    icon: Icons.home,
+                    label: 'Home',
+                    onTap: () {
                       Navigator.of(context).push(NoAnimationPageRoute(
                         page: HomePage(),
                       ));
                     },
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.history, size: 28, color: Colors.white),
-                    onPressed: () {
+                  // Tombol Riwayat
+                  buildIconWithLabel(
+                    context,
+                    icon: Icons.history,
+                    label: 'Riwayat',
+                    onTap: () {
                       Navigator.of(context).push(NoAnimationPageRoute(
                         page: HistoryPage(),
                       ));
                     },
                   ),
-                  SizedBox(width: screenWidth * 0.15), // Space untuk FAB, 15% dari lebar layar
-                  IconButton(
-                    icon: const Icon(Icons.help_outline, size: 28, color: Colors.white),
-                    onPressed: () {
+                  SizedBox(width: screenWidth * 0.15),
+                  // Tombol Bantuan
+                  buildIconWithLabel(
+                    context,
+                    icon: Icons.help_outline,
+                    label: 'Bantuan',
+                    onTap: () {
                       Navigator.of(context).push(NoAnimationPageRoute(
-                        page: HelpPage(),
+                        page: const HelpPage(),
                       ));
                     },
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.person_outline, size: 28, color: Colors.white),
-                    onPressed: () {
+                  // Tombol User
+                  buildIconWithLabel(
+                    context,
+                    icon: Icons.person_outline,
+                    label: 'Akun',
+                    onTap: () {
                       Navigator.of(context).push(NoAnimationPageRoute(
-                        page: AccountPage(),
+                        page: const AccountPage(),
                       ));
                     },
                   ),
@@ -232,25 +248,45 @@ Widget buildBottomAppBar(BuildContext context) {
           ),
         ),
       ),
+      // Tombol Untuk Floating Button QR Code
       Positioned(
-        top: -20, // Jarak dari bagian atas
-        left: (screenWidth - 70) / 2, // Posisi horizontal, agar berada di tengah
+        top: -20,
+        left: (screenWidth - 70) / 2,
         child: SizedBox(
-          width: 70, // Lebar FAB
-          height: 70, // Tinggi FAB
+          width: 70,
+          height: 70,
           child: FloatingActionButton(
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => ScanQRPage(),
+                builder: (context) => const ScanQRPage(),
               ));
             },
             backgroundColor: Colors.white,
             elevation: 5,
-            shape: CircleBorder(),
-            child: const Icon(Icons.qr_code_scanner, color: Colors.lightBlueAccent, size: 40),
+            shape: const CircleBorder(),
+            child: const Icon(
+              Icons.qr_code_scanner,
+              color: Colors.lightBlueAccent,
+              size: 40,
+            ),
           ),
         ),
       ),
     ],
+  );
+}
+
+// Fungsi untuk membuat Icon dengan Label di bawahnya
+Widget buildIconWithLabel(BuildContext context, {required IconData icon, required String label, required VoidCallback onTap}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 28, color: Colors.white),
+        const SizedBox(height: 4),
+        Text(label, style: const TextStyle(color: Colors.white, fontSize: 12)),
+      ],
+    ),
   );
 }
