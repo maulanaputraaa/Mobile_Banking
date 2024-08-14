@@ -91,6 +91,7 @@ PreferredSizeWidget buildAppBar(BuildContext context) {
   );
 }
 
+//Widget Untuk Menampilkan Semua Fungsi
 class AllOptionFunctions {
   static Widget buildProfileHeader() {
     return Container(
@@ -121,6 +122,7 @@ class AllOptionFunctions {
     );
   }
 
+  // Fungsi untuk Membangun Semua Fitur
   static Widget buildAdditionalSection(BuildContext context, String searchQuery) {
     final sections = {
       'Telekomunikasi': {
@@ -219,6 +221,7 @@ class AllOptionFunctions {
     );
   }
 
+  //Widget Untuk Pengaturan Semua Fitur
   static Widget buildSettingItem(BuildContext context, String title, Map<String, String> options,
       {Color color = Colors.black, required int crossAxisCount}) {
     return ExpansionTile(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import '../main_feature_function/qrcode_page.dart';
 import '../main_page/account_page.dart';
 import '../main_page/help_page.dart';
@@ -120,7 +119,7 @@ class ConnectItemsWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Container(
+                  SizedBox(
                     width: 55, // Lebar container
                     height: 55, // Tinggi container
                     child: Image.asset(
@@ -131,7 +130,7 @@ class ConnectItemsWidget extends StatelessWidget {
                   const SizedBox(width: 15),
                   Text(
                     item['text'],
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
