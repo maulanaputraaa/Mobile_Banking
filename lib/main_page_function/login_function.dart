@@ -203,7 +203,7 @@ Widget loginButton(BuildContext context, TextEditingController emailController, 
       },
       style: ElevatedButton.styleFrom(
         shape: const StadiumBorder(),
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         backgroundColor: Colors.lightGreenAccent,
       ),
       child: const Text(

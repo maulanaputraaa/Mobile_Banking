@@ -158,8 +158,8 @@ Widget signUpButton(
     onPressed: onRegisterPressed, // Memanggil fungsi onRegisterPressed
     style: ElevatedButton.styleFrom(
       foregroundColor: Colors.white,
-      backgroundColor: Colors.green, // Warna latar belakang tombol
-      padding: const EdgeInsets.symmetric(vertical: 15),
+      backgroundColor: Colors.lightGreenAccent, // Warna latar belakang tombol
+      padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 55),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
       ),
@@ -167,7 +167,7 @@ Widget signUpButton(
     child: const Text(
       'Daftar',
       style: TextStyle(
-        color: Colors.white,
+        color: Colors.black,
         fontSize: 18,
       ),
     ),

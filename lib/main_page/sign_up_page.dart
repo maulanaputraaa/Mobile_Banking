@@ -1,7 +1,6 @@
 import 'package:coba/main_page/otp_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../main_page/login_page.dart';
 import '../main_page_function/sign_up_function.dart';
 import 'package:email_validator/email_validator.dart';
 
