@@ -414,12 +414,12 @@ class _AddVisitFormState extends State<AddVisitForm> {
             child: ElevatedButton(
               onPressed: _submitReport,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
+                backgroundColor: Colors.lightGreenAccent,
                 padding: const EdgeInsets.symmetric(
                     horizontal: 20, vertical: 15),
               ),
               child: const Text('Kirim Laporan Kunjungan',
-                  style: TextStyle(color: Colors.white)),
+                  style: TextStyle(color: Colors.black)),
             ),
           ),
         ],
