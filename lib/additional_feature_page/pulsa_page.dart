@@ -15,7 +15,7 @@ class _PulsaPageState extends State<PulsaPage> {
   final ValueNotifier<int?> _selectedPaketDataHargaNotifier = ValueNotifier<int?>(null);
 
   Future<void> _handleRefresh() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
 
     // Reset state
     _nomorHpController.clear();
@@ -53,9 +53,9 @@ class _PulsaPageState extends State<PulsaPage> {
           onRefresh: _handleRefresh,
           child: ListView(
             children: [
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               buildNomorHP(_nomorHpController, _validateOperator),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               ValueListenableBuilder<bool>(
                 valueListenable: _isNomorHpValidNotifier,
                 builder: (context, isNomorHpValid, child) {
@@ -76,7 +76,7 @@ class _PulsaPageState extends State<PulsaPage> {
                   );
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ValueListenableBuilder<int?>(
                 valueListenable: _selectedNominalHargaNotifier,
                 builder: (context, selectedNominalHarga, child) {
@@ -92,7 +92,7 @@ class _PulsaPageState extends State<PulsaPage> {
                   );
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
             ],
           ),
         ),

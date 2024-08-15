@@ -124,7 +124,7 @@ Widget buildNomorHP(TextEditingController controller, Function(String) onChanged
           onChanged('08980626720');
         },
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
           decoration: BoxDecoration(
             color: Colors.blue,
             borderRadius: BorderRadius.circular(10),
@@ -137,7 +137,7 @@ Widget buildNomorHP(TextEditingController controller, Function(String) onChanged
               ),
             ],
           ),
-          child: Text(
+          child: const Text(
             '08980626720', // Ganti dengan nomor HP yang sesuai
             style: TextStyle(
               fontSize: 16,
@@ -183,7 +183,7 @@ Widget buildPilihNominal(
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Pulsa',
                 style: TextStyle(
                   fontSize: 18,
@@ -191,7 +191,7 @@ Widget buildPilihNominal(
                   color: Colors.blueAccent,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Wrap(
                 spacing: 10.0,
                 runSpacing: 10.0,
@@ -206,8 +206,8 @@ Widget buildPilihNominal(
                       onNominalSelected(item['nominal'], item['harga']);
                     },
                     child: AnimatedContainer(
-                      duration: Duration(milliseconds: 300),
-                      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      duration: const Duration(milliseconds: 300),
+                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                       decoration: BoxDecoration(
                         color: isSelected
                             ? Colors.grey
@@ -218,13 +218,13 @@ Widget buildPilihNominal(
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 2,
                             blurRadius: 5,
-                            offset: Offset(0, 3),
+                            offset: const Offset(0, 3),
                           ),
                         ],
                       ),
                       child: Text(
                         'Rp ${item['nominal']}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -236,11 +236,11 @@ Widget buildPilihNominal(
               ),
             ],
           ),
-          SizedBox(height: 40), // Space between columns
+          const SizedBox(height: 40), // Space between columns
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Paket Data',
                 style: TextStyle(
                   fontSize: 18,
@@ -248,7 +248,7 @@ Widget buildPilihNominal(
                   color: Colors.blueAccent,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Wrap(
                 spacing: 10.0,
                 runSpacing: 10.0,
@@ -263,8 +263,8 @@ Widget buildPilihNominal(
                       onPaketDataSelected(item['paket'], item['harga']);
                     },
                     child: AnimatedContainer(
-                      duration: Duration(milliseconds: 300),
-                      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      duration: const Duration(milliseconds: 300),
+                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                       decoration: BoxDecoration(
                         color: isSelected
                             ? Colors.grey
@@ -275,13 +275,13 @@ Widget buildPilihNominal(
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 2,
                             blurRadius: 5,
-                            offset: Offset(0, 3),
+                            offset: const Offset(0, 3),
                           ),
                         ],
                       ),
                       child: Text(
                         '${item['paket']} - Rp ${item['harga']}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -293,7 +293,7 @@ Widget buildPilihNominal(
               ),
             ],
           ),
-          SizedBox(height: 20), // Space for the total payment section
+          const SizedBox(height: 20), // Space for the total payment section
 
         ],
       );
@@ -322,7 +322,7 @@ Widget buildTotalPembayaran(int? selectedNominalHarga, int? selectedPaketDataHar
   String hargaAsli = 'Rp ${total.toStringAsFixed(0)}';
 
   return Container(
-    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+    padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(10),
@@ -333,7 +333,7 @@ Widget buildTotalPembayaran(int? selectedNominalHarga, int? selectedPaketDataHar
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Harga ',
               style: TextStyle(
                 fontSize: 16,
@@ -342,18 +342,18 @@ Widget buildTotalPembayaran(int? selectedNominalHarga, int? selectedPaketDataHar
             ),
             Text(
               hargaAsli,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: Colors.black54,
               ),
             ),
           ],
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Pajak PPN 11%',
               style: TextStyle(
                 fontSize: 16,
@@ -362,18 +362,18 @@ Widget buildTotalPembayaran(int? selectedNominalHarga, int? selectedPaketDataHar
             ),
             Text(
               pajakPpn,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: Colors.black54,
               ),
             ),
           ],
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Total Pembayaran',
               style: TextStyle(
                 fontSize: 18,
@@ -383,7 +383,7 @@ Widget buildTotalPembayaran(int? selectedNominalHarga, int? selectedPaketDataHar
             ),
             Text(
               totalHarga,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.blueAccent,
@@ -391,7 +391,7 @@ Widget buildTotalPembayaran(int? selectedNominalHarga, int? selectedPaketDataHar
             ),
           ],
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Center(
           child: ElevatedButton(
             onPressed: () {

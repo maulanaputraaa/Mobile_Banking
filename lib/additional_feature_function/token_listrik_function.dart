@@ -1,5 +1,3 @@
-import 'package:coba/additional_feature_page/bulanan_listrik_page.dart';
-import 'package:coba/additional_feature_page/token_listrik_page.dart';
 import 'package:flutter/material.dart';
 import '../main_feature_function/qrcode_page.dart';
 import '../main_page/account_page.dart';
@@ -34,7 +32,7 @@ PreferredSizeWidget buildAppBar(BuildContext context) {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'Listrik',
+              'Top-Up Token Listrik',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
@@ -87,97 +85,86 @@ PreferredSizeWidget buildAppBar(BuildContext context) {
   );
 }
 
-// Fungsi untuk menampilkan dua container
-Widget buildListrikOptions(BuildContext context) {
-  return Column(
+Widget buildNomorPelangganTextField(TextEditingController controller) {
+  return TextField(
+    controller: controller,
+    decoration: const InputDecoration(
+      border: OutlineInputBorder(),
+      hintText: 'Masukkan nomor pelanggan',
+    ),
+    keyboardType: TextInputType.number,
+    onChanged: (value) {
+      // Update tampilan ketika nomor pelanggan diisi
+    },
+  );
+}
+
+Widget buildNominalOptions(Function(String) onSelectNominal) {
+  return Wrap(
+    spacing: 10.0,
     children: [
-      const SizedBox(height: 20),
-      // Container pertama
-      Container(
-        padding: const EdgeInsets.all(16.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              spreadRadius: 2,
-              blurRadius: 5,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Tagihan',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-            ),
-            const SizedBox(height: 10),
-            ListTile(
-              leading: Image.asset(
-                'assets/icon/listrik_icon.png', // Path gambar dalam folder assets
-                width: 30, // Lebar gambar
-                height: 30, // Tinggi gambar
-              ),
-              title: const Text('Tagihan Bulanan'),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-              onTap: () {
-                Navigator.of(context).push(NoAnimationPageRoute(
-                  page: const BulananListrikPage(),
-                ));
-              },
-            ),
-          ],
-        ),
-      ),
-      const SizedBox(height: 20),
-      // Container kedua
-      Container(
-        padding: const EdgeInsets.all(16.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              spreadRadius: 2,
-              blurRadius: 5,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Top Up',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-            ),
-            const SizedBox(height: 10),
-            ListTile(
-              leading: const Icon(Icons.swap_horiz),
-              title: const Text('Top Up Token Listrik'),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-              onTap: () {
-                Navigator.of(context).push(NoAnimationPageRoute(
-                  page: TokenListrikPage(),
-                ));
-              },
-            ),
-          ],
-        ),
-      ),
+      buildNominalButton('Rp 20.000', onSelectNominal),
+      buildNominalButton('Rp 50.000', onSelectNominal),
+      buildNominalButton('Rp 100.000', onSelectNominal),
+      buildNominalButton('Rp 200.000', onSelectNominal),
+      buildNominalButton('Rp 500.000', onSelectNominal),
+      buildNominalButton('Rp 1.000.000', onSelectNominal),
     ],
   );
 }
+
+Widget buildNominalButton(String nominal, Function(String) onSelectNominal) {
+  return ElevatedButton(
+    onPressed: () {
+      onSelectNominal(nominal);
+    },
+    child: Text(nominal),
+  );
+}
+
+Widget buildSubmitButton(BuildContext context) {
+  return Center(
+    child: ElevatedButton(
+      onPressed: () {
+        // Implementasikan logika submit
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.lightGreenAccent,
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+      child: const Text('Beli Token'),
+    ),
+  );
+}
+
+double getTokenPrice(String nominal) {
+  switch (nominal) {
+    case 'Rp 20.000':
+      return 20000;
+    case 'Rp 50.000':
+      return 50000;
+    case 'Rp 100.000':
+      return 100000;
+    case 'Rp 200.000':
+      return 200000;
+    case 'Rp 500.000':
+      return 500000;
+    case 'Rp 1.000.000':
+      return 1000000;
+    default:
+      return 0;
+  }
+}
+
+double calculatePPN(double price) {
+  return price * 0.11;
+}
+
+double calculateTotalPrice(double price, double ppn) {
+  return price + ppn;
+}
+
 
 // Widget Untuk BottomAppBar
 Widget buildBottomAppBar(BuildContext context) {
@@ -312,3 +299,4 @@ Widget buildIconWithLabel(BuildContext context, {required IconData icon, require
     ),
   );
 }
+
