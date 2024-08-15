@@ -139,7 +139,7 @@ class ConnectItemsWidget extends StatelessWidget {
                   print('${item['text']} connected');
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.greenAccent,
+                  backgroundColor: Colors.lightGreenAccent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
@@ -147,7 +147,7 @@ class ConnectItemsWidget extends StatelessWidget {
                 child: const Text(
                   'Connect',
                   style: TextStyle(
-                    color: Colors.white, // Warna teks
+                    color: Colors.black, // Warna teks
                   ),
                 ),
               ),

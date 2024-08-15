@@ -153,7 +153,7 @@ class _BillCheckPageState extends State<BillCheckPage> {
               color: Colors.blueGrey[800],
             ),
           ),
-          SizedBox(height: 20.0),
+          const SizedBox(height: 20.0),
           Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.0),
@@ -172,7 +172,7 @@ class _BillCheckPageState extends State<BillCheckPage> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.0),
                         ),
-                        prefixIcon: Icon(Icons.keyboard),
+                        prefixIcon: const Icon(Icons.keyboard),
                       ),
                       keyboardType: TextInputType.number,
                       validator: (value) {
@@ -182,21 +182,21 @@ class _BillCheckPageState extends State<BillCheckPage> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 20.0),
+                    const SizedBox(height: 20.0),
                     ElevatedButton(
                       onPressed: _checkBill,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        padding: EdgeInsets.symmetric(vertical: 14.0),
+                        backgroundColor: Colors.lightBlueAccent,
+                        padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0),
+                          borderRadius: BorderRadius.circular(20.0),
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Cek Tagihan',
                         style: TextStyle(
                             fontSize: 16.0,
-                            color: Colors.white
+                            color: Colors.black
                         ),
                       ),
                     ),
@@ -205,13 +205,23 @@ class _BillCheckPageState extends State<BillCheckPage> {
               ),
             ),
           ),
-          SizedBox(height: 20.0),
+          const SizedBox(height: 20.0),
           if (_billAmount.isNotEmpty)
-            Card(
-              shape: RoundedRectangleBorder(
+            Container(
+              width: MediaQuery.of(context).size.width * 0.9,
+              margin: const EdgeInsets.symmetric(horizontal: 16.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(12.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    spreadRadius: 3,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
               ),
-              elevation: 3,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -237,10 +247,32 @@ class _BillCheckPageState extends State<BillCheckPage> {
                           color: Colors.red[800],
                         ),
                       ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Logika pembayaran tagihan
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.lightGreenAccent,
+                        padding: const EdgeInsets.symmetric(vertical: 12.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Bayar Tagihan',
+                          style: textTheme.bodyLarge?.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
-            ),
+            )
         ],
       ),
     );

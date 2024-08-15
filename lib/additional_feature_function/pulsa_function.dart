@@ -398,8 +398,8 @@ Widget buildTotalPembayaran(int? selectedNominalHarga, int? selectedPaketDataHar
               print('Tombol Bayar ditekan');
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blueAccent,
-              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+              backgroundColor: Colors.lightGreenAccent,
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50),
               ),
@@ -409,7 +409,7 @@ Widget buildTotalPembayaran(int? selectedNominalHarga, int? selectedPaketDataHar
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
           ),
