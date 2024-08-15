@@ -1,3 +1,4 @@
+import 'package:coba/additional_feature_page/bulanan_listrik_page.dart';
 import 'package:flutter/material.dart';
 import '../main_feature_function/qrcode_page.dart';
 import '../main_page/account_page.dart';
@@ -86,7 +87,7 @@ PreferredSizeWidget buildAppBar(BuildContext context) {
 }
 
 // Fungsi untuk menampilkan dua container
-Widget buildListrikOptions() {
+Widget buildListrikOptions(BuildContext context) {
   return Column(
     children: [
       const SizedBox(height: 20),
@@ -125,10 +126,11 @@ Widget buildListrikOptions() {
               title: const Text('Tagihan Bulanan'),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
-                // Handle tap
+                Navigator.of(context).push(NoAnimationPageRoute(
+                  page: const BulananListrikPage(),
+                ));
               },
             ),
-
           ],
         ),
       ),

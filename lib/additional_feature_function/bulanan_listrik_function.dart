@@ -32,7 +32,7 @@ PreferredSizeWidget buildAppBar(BuildContext context) {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'Tagihan Internet',
+              'Tagihan Bulanan Listrik',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
@@ -147,7 +147,7 @@ class _BillCheckPageState extends State<BillCheckPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Cek Tagihan Internet',
+            'Cek Tagihan Listrik',
             style: textTheme.headlineMedium?.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.blueGrey[800],

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../additional_feature_function/listrik_function.dart';
+import '../additional_feature_function/bulanan_listrik_function.dart';
 
-class ListrikPage extends StatelessWidget {
-  const ListrikPage({super.key});
+class BulananListrikPage extends StatelessWidget {
+  const BulananListrikPage({super.key});
 
   Future<void> _handleRefresh() async {
     // Implementasi fungsi refresh di sini
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
   }
 
   @override
@@ -14,13 +14,14 @@ class ListrikPage extends StatelessWidget {
     return Scaffold(
       appBar: buildAppBar(context),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0,),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: RefreshIndicator(
           onRefresh: _handleRefresh,
           child: ListView(
-            children: [
-              const SizedBox(height: 20,),
-              buildListrikOptions(context),
+            children: const [
+              SizedBox(height: 20),
+              BillCheckPage(),
+
             ],
           ),
         ),

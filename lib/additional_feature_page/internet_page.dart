@@ -18,7 +18,7 @@ class InternetPage extends StatelessWidget {
         child: RefreshIndicator(
           onRefresh: _handleRefresh,
           child: ListView(
-            children: [
+            children: const [
               SizedBox(height: 20),
               BillCheckPage(),
               
