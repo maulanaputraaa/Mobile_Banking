@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'components/body.dart';
 
 class LocationTrackingScreen extends StatelessWidget {
-  const LocationTrackingScreen({Key? key}) : super(key: key);
+  const LocationTrackingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Location App'),
+        title: const Text('Location App'),
         centerTitle: true,
       ),
       body: const Padding(

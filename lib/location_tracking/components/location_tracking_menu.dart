@@ -10,7 +10,7 @@ class LocationTrackingMenu extends StatelessWidget {
   final VoidCallback onStopTrackingPressed;
 
   const LocationTrackingMenu({
-    Key? key,
+    super.key,
     required this.gpsEnabled,
     required this.permissionGranted,
     required this.trackingEnabled,
@@ -18,7 +18,7 @@ class LocationTrackingMenu extends StatelessWidget {
     required this.onRequestPermissionPressed,
     required this.onStartTrackingPressed,
     required this.onStopTrackingPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

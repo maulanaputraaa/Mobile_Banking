@@ -1,13 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart' as l;
 import 'package:permission_handler/permission_handler.dart';
-
 import 'location_tracking_menu.dart';
 
 class Body extends StatefulWidget {
@@ -198,7 +196,7 @@ class _BodyState extends State<Body> {
     l.LocationData initialLocation = await location.getLocation();
     addLocation(initialLocation);
 
-    // Timer untuk menjalankan tracking setiap 5 menit (300000 milidetik)
+    // Timer untuk menjalankan tracking
     trackingTimer = Timer.periodic(const Duration(milliseconds: 10000), (_) async {
       l.LocationData locationData = await location.getLocation();
       addLocation(locationData);
