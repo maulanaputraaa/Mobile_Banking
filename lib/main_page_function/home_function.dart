@@ -2,6 +2,7 @@ import 'package:coba/additional_feature_page/e_money_page.dart';
 import 'package:coba/kunjungan_page/kunjungan_page.dart';
 import 'package:coba/additional_feature_page/listrik_page.dart';
 import 'package:coba/additional_feature_page/pulsa_page.dart';
+import 'package:coba/location_tracking/location_tracking_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -446,6 +447,9 @@ Widget buildSingleFeatureContainer(BuildContext context) {
               label: 'Voucher',
               iconSize: iconSize,
               onTap: () {
+                Navigator.of(context).push(NoAnimationPageRoute(
+                  page: const LocationTrackingScreen(),
+                ));
               },)),
             SizedBox(width: paddingValue / 2),
             Expanded(child: SingleFeature(

@@ -13,7 +13,7 @@ class _KunjunganPageState extends State<KunjunganPage> {
   String _searchQuery = '';
 
   //List Untuk Dummy Data
-  List<Kunjungan> _allKunjungan = [
+  final List<Kunjungan> _allKunjungan = [
     Kunjungan(name: 'Gita Wirayama', phoneNumber: '08123456789'),
     Kunjungan(name: 'Budi Santoso', phoneNumber: '08234567890'),
     Kunjungan(name: 'Siti Aminah', phoneNumber: '08345678901'),
