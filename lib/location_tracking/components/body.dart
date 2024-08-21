@@ -21,8 +21,12 @@ class _BodyState extends State<Body> {
   l.Location location = l.Location();
   Timer? trackingTimer;
   bool trackingEnabled = false;
-  List<l.LocationData> trackedLocations = [];
-  List<String> streetNames = [];
+  l.LocationData? initialLocation;
+  l.LocationData? latestLocation;
+  String? initialStreetName;
+  String? latestStreetName;
+  double? distanceBetween;
+  List<LatLng> routePoints = [];
 
   @override
   void initState() {
@@ -57,65 +61,116 @@ class _BodyState extends State<Body> {
   }
 
   Widget buildLocationList() {
-    return ListView.builder(
-      itemCount: trackedLocations.length,
-      itemBuilder: (context, index) {
-        final location = trackedLocations[index];
-        final streetName = streetNames.isNotEmpty ? streetNames[index] : "Loading...";
-
-        return Column(
-          children: [
-            ListTile(
-              title: Text("${location.latitude}, ${location.longitude}"),
-              subtitle: Text(streetName),
-            ),
-            SizedBox(
-              height: 200,
-              child: FlutterMap(
-                options: MapOptions(
-                  initialCenter: LatLng(location.latitude ?? 0.0, location.longitude ?? 0.0),
-                  initialZoom: 15,
-                ),
-                children: [
-                  TileLayer(
-                    urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                    subdomains: const ['a', 'b', 'c'],
-                  ),
-                  MarkerLayer(
-                    markers: [
-                      Marker(
-                        width: 80.0,
-                        height: 80.0,
-                        point: LatLng(location.latitude ?? 0.0, location.longitude ?? 0.0),
-                        child: const Icon(Icons.location_on, color: Colors.red),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        );
-      },
+    return ListView(
+      children: [
+        if (initialLocation != null) buildLocationTile(initialLocation!, initialStreetName ?? "Loading..."),
+        if (latestLocation != null) buildLocationTileWithDistance(latestLocation!, latestStreetName ?? "Loading..."),
+        if (routePoints.isNotEmpty) buildRouteMap(),
+      ],
     );
   }
 
-  Future<void> getStreetName(double latitude, double longitude) async {
+  Widget buildLocationTile(l.LocationData location, String streetName) {
+    return Column(
+      children: [
+        ListTile(
+          title: Text("${location.latitude}, ${location.longitude}"),
+          subtitle: Text(streetName),
+        ),
+        SizedBox(
+          height: 200,
+          child: FlutterMap(
+            options: MapOptions(
+              initialCenter: LatLng(location.latitude ?? 0.0, location.longitude ?? 0.0),
+              initialZoom: 15,
+            ),
+            children: [
+              TileLayer(
+                urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                subdomains: const ['a', 'b', 'c'],
+              ),
+              MarkerLayer(
+                markers: [
+                  Marker(
+                    width: 80.0,
+                    height: 80.0,
+                    point: LatLng(location.latitude ?? 0.0, location.longitude ?? 0.0),
+                    child: const Icon(Icons.location_on, color: Colors.red),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildLocationTileWithDistance(l.LocationData location, String streetName) {
+    return Column(
+      children: [
+        ListTile(
+          title: Text("${location.latitude}, ${location.longitude}"),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(streetName),
+              if (distanceBetween != null)
+                Text("Jarak ke lokasi tujuan: ${distanceBetween!.toStringAsFixed(2)} meter"),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildRouteMap() {
+    return SizedBox(
+      height: 200,
+      child: FlutterMap(
+        options: MapOptions(
+          initialCenter: LatLng(initialLocation?.latitude ?? 0.0, initialLocation?.longitude ?? 0.0),
+          initialZoom: 15,
+        ),
+        children: [
+          TileLayer(
+            urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+            subdomains: const ['a', 'b', 'c'],
+          ),
+          PolylineLayer(
+            polylines: [
+              Polyline(
+                points: routePoints,
+                strokeWidth: 4.0,
+                color: Colors.blue,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> getStreetName(double latitude, double longitude, {bool isInitial = false}) async {
     try {
       List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
       if (placemarks.isNotEmpty) {
         setState(() {
-          streetNames.add(placemarks[0].street ?? "Unknown Street");
-        });
-      } else {
-        setState(() {
-          streetNames.add("Unknown Street");
+          if (isInitial) {
+            initialStreetName = placemarks[0].street ?? "Unknown Street";
+          } else {
+            latestStreetName = placemarks[0].street ?? "Unknown Street";
+          }
         });
       }
     } catch (e) {
       log("Failed to get street name: $e");
       setState(() {
-        streetNames.add("Error fetching street name");
+        if (isInitial) {
+          initialStreetName = "Error fetching street name";
+        } else {
+          latestStreetName = "Error fetching street name";
+        }
       });
     }
   }
@@ -169,19 +224,38 @@ class _BodyState extends State<Body> {
     });
   }
 
-  void addLocation(l.LocationData data) async {
-    setState(() {
-      trackedLocations.insert(0, data);
-    });
-
-    await getStreetName(data.latitude!, data.longitude!);
+  void addLocation(l.LocationData data, {bool isInitial = false}) async {
+    if (isInitial) {
+      setState(() {
+        initialLocation = data;
+      });
+      await getStreetName(data.latitude!, data.longitude!, isInitial: true);
+    } else {
+      setState(() {
+        latestLocation = data;
+      });
+      await getStreetName(data.latitude!, data.longitude!);
+      calculateDistanceAndRoute();
+    }
   }
 
-  void clearLocation() {
-    setState(() {
-      trackedLocations.clear();
-      streetNames.clear();
-    });
+  void calculateDistanceAndRoute() {
+    if (initialLocation != null && latestLocation != null) {
+      // Hitung jarak
+      final distance = const Distance();
+      distanceBetween = distance(
+        LatLng(initialLocation!.latitude!, initialLocation!.longitude!),
+        LatLng(latestLocation!.latitude!, latestLocation!.longitude!),
+      );
+
+      // Buat rute antara lokasi tetap dan lokasi terbaru
+      routePoints = [
+        LatLng(initialLocation!.latitude!, initialLocation!.longitude!),
+        LatLng(latestLocation!.latitude!, latestLocation!.longitude!),
+      ];
+
+      setState(() {});
+    }
   }
 
   void startTracking() async {
@@ -193,11 +267,11 @@ class _BodyState extends State<Body> {
     }
 
     // Ambil lokasi pertama langsung saat tracking dimulai
-    l.LocationData initialLocation = await location.getLocation();
-    addLocation(initialLocation);
+    l.LocationData initialLocationData = await location.getLocation();
+    addLocation(initialLocationData, isInitial: true);
 
     // Timer untuk menjalankan tracking
-    trackingTimer = Timer.periodic(const Duration(milliseconds: 10000), (_) async {
+    trackingTimer = Timer.periodic(const Duration(seconds: 10), (_) async {
       l.LocationData locationData = await location.getLocation();
       addLocation(locationData);
     });
@@ -209,9 +283,14 @@ class _BodyState extends State<Body> {
 
   void stopTracking() {
     trackingTimer?.cancel();
+
     setState(() {
       trackingEnabled = false;
+      initialLocation = null;
+      latestLocation = null;
+      distanceBetween = null;
+      routePoints.clear();
     });
-    clearLocation();
   }
+
 }
