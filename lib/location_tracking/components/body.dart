@@ -23,7 +23,7 @@ class _BodyState extends State<Body> {
   l.Location location = l.Location();
   Timer? trackingTimer;
   bool trackingEnabled = false;
-  List<l.LocationData> locations = [];
+  List<l.LocationData> trackedLocations = [];
   List<String> streetNames = [];
 
   @override
@@ -60,9 +60,9 @@ class _BodyState extends State<Body> {
 
   Widget buildLocationList() {
     return ListView.builder(
-      itemCount: locations.length,
+      itemCount: trackedLocations.length,
       itemBuilder: (context, index) {
-        final location = locations[index];
+        final location = trackedLocations[index];
         final streetName = streetNames.isNotEmpty ? streetNames[index] : "Loading...";
 
         return Column(
@@ -173,7 +173,7 @@ class _BodyState extends State<Body> {
 
   void addLocation(l.LocationData data) async {
     setState(() {
-      locations.insert(0, data);
+      trackedLocations.insert(0, data);
     });
 
     await getStreetName(data.latitude!, data.longitude!);
@@ -181,7 +181,7 @@ class _BodyState extends State<Body> {
 
   void clearLocation() {
     setState(() {
-      locations.clear();
+      trackedLocations.clear();
       streetNames.clear();
     });
   }
@@ -194,12 +194,12 @@ class _BodyState extends State<Body> {
       return;
     }
 
-    // Lokasi pertama ditambahkan langsung saat tracking dimulai
+    // Ambil lokasi pertama langsung saat tracking dimulai
     l.LocationData initialLocation = await location.getLocation();
     addLocation(initialLocation);
 
-    // Timer akan menjalankan tracking setiap 5 menit (300000 milidetik)
-    trackingTimer = Timer.periodic(const Duration(milliseconds: 300000), (_) async {
+    // Timer untuk menjalankan tracking setiap 5 menit (300000 milidetik)
+    trackingTimer = Timer.periodic(const Duration(milliseconds: 10000), (_) async {
       l.LocationData locationData = await location.getLocation();
       addLocation(locationData);
     });
