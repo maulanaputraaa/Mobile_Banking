@@ -12,7 +12,7 @@ class TagihanPage extends StatefulWidget {
 class _TagihanPageState extends State<TagihanPage> {
   Future<void> _handleRefresh() async {
     // Implementasi fungsi refresh di sini
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     setState(() {
       // Update data atau state yang diperlukan
     });

@@ -133,7 +133,7 @@ Widget buildNomorHP(TextEditingController controller, Function(String) onChanged
                 color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 2,
                 blurRadius: 5,
-                offset: Offset(0, 3),
+                offset: const Offset(0, 3),
               ),
             ],
           ),
@@ -467,7 +467,7 @@ Widget buildBottomAppBar(BuildContext context) {
                     label: 'Home',
                     onTap: () {
                       Navigator.of(context).push(NoAnimationPageRoute(
-                        page: HomePage(),
+                        page: const HomePage(),
                       ));
                     },
                   ),
@@ -478,7 +478,7 @@ Widget buildBottomAppBar(BuildContext context) {
                     label: 'Riwayat',
                     onTap: () {
                       Navigator.of(context).push(NoAnimationPageRoute(
-                        page: HistoryPage(),
+                        page: const HistoryPage(),
                       ));
                     },
                   ),

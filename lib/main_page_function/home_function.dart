@@ -177,7 +177,7 @@ class _BalanceContainerState extends State<BalanceContainer> {
                 ),
                 onPressed: () {
                   Navigator.of(context).push(NoAnimationPageRoute(
-                    page: RekeningPage(),
+                    page: const RekeningPage(),
                   ));
                 },
               )
@@ -258,7 +258,7 @@ Widget buildMainFeatureContainers(BuildContext context) {
             label: 'Transfer',
             onTap: () {
               Navigator.of(context).push(NoAnimationPageRoute(
-                page: TransferPage(),
+                page: const TransferPage(),
               ));
             },
           ),
@@ -269,7 +269,7 @@ Widget buildMainFeatureContainers(BuildContext context) {
             label: 'Rekening',
             onTap: () {
               Navigator.of(context).push(NoAnimationPageRoute(
-                page: RekeningPage(),
+                page: const RekeningPage(),
               ));
             },
           ),
@@ -280,7 +280,7 @@ Widget buildMainFeatureContainers(BuildContext context) {
             label: 'Tagihan',
             onTap: () {
               Navigator.of(context).push(NoAnimationPageRoute(
-              page: TagihanPage(),
+              page: const TagihanPage(),
               ));
             },
           ),
@@ -486,7 +486,7 @@ class SingleFeature extends StatelessWidget {
   final double iconSize;
   final VoidCallback onTap;
 
-  SingleFeature({
+  const SingleFeature({super.key, 
     required this.iconPath,
     required this.label,
     required this.iconSize,
@@ -719,7 +719,7 @@ Widget buildBottomAppBar(BuildContext context) {
                     label: 'Home',
                     onTap: () {
                       Navigator.of(context).push(NoAnimationPageRoute(
-                        page: HomePage(),
+                        page: const HomePage(),
                       ));
                     },
                   ),
@@ -730,7 +730,7 @@ Widget buildBottomAppBar(BuildContext context) {
                     label: 'Riwayat',
                     onTap: () {
                       Navigator.of(context).push(NoAnimationPageRoute(
-                        page: HistoryPage(),
+                        page: const HistoryPage(),
                       ));
                     },
                   ),

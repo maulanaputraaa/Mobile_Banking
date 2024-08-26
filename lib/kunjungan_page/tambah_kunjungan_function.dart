@@ -101,6 +101,8 @@ PreferredSizeWidget buildAppBar(BuildContext context) {
 
 //Widget Untuk Menambah Laporan Kunjungan
 class AddVisitForm extends StatefulWidget {
+  const AddVisitForm({super.key});
+
   @override
   _AddVisitFormState createState() => _AddVisitFormState();
 }
@@ -158,8 +160,8 @@ class _AddVisitFormState extends State<AddVisitForm> {
   }
 
   Future<void> _pickImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.camera);
 
     if (image != null) {
       setState(() {
@@ -475,7 +477,7 @@ Widget buildBottomAppBar(BuildContext context) {
                     label: 'Home',
                     onTap: () {
                       Navigator.of(context).push(NoAnimationPageRoute(
-                        page: HomePage(),
+                        page: const HomePage(),
                       ));
                     },
                   ),
@@ -486,7 +488,7 @@ Widget buildBottomAppBar(BuildContext context) {
                     label: 'Riwayat',
                     onTap: () {
                       Navigator.of(context).push(NoAnimationPageRoute(
-                        page: HistoryPage(),
+                        page: const HistoryPage(),
                       ));
                     },
                   ),

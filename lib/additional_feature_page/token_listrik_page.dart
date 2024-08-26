@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../additional_feature_function/token_listrik_function.dart';
 
 class TokenListrikPage extends StatefulWidget {
+  const TokenListrikPage({super.key});
+
   @override
   _TokenListrikPageState createState() => _TokenListrikPageState();
 }

@@ -40,7 +40,7 @@ class _KunjunganPageState extends State<KunjunganPage> {
 
   Future<void> _handleRefresh() async {
     // Implementasi fungsi refresh di sini
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     // Logika untuk memperbarui data dapat ditambahkan di sini
   }
 
@@ -54,9 +54,9 @@ class _KunjunganPageState extends State<KunjunganPage> {
           onRefresh: _handleRefresh,
           child: ListView(
             children: [
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               buildSearchBar(_searchController),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               buildKunjunganDummy(_filteredKunjungan),
             ],
           ),

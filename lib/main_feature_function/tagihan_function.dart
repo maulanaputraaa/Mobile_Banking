@@ -206,7 +206,7 @@ Widget buildTagihanOptions(BuildContext context) {
 Widget buildGridItem(String title, String assetPath, VoidCallback onTap, {double inkWellRadius = 16.0}) {
   return StatefulBuilder(
     builder: (context, setState) {
-      bool _isTapped = false;
+      bool isTapped = false;
 
       return Material(
         color: Colors.transparent,
@@ -214,7 +214,7 @@ Widget buildGridItem(String title, String assetPath, VoidCallback onTap, {double
         child: InkResponse(
           onTap: () {
             setState(() {
-              _isTapped = !_isTapped;
+              isTapped = !isTapped;
             });
             onTap();
           },
@@ -224,7 +224,7 @@ Widget buildGridItem(String title, String assetPath, VoidCallback onTap, {double
           highlightColor: Colors.black.withOpacity(0.2),
           borderRadius: BorderRadius.circular(90.0),
           child: AnimatedScale(
-            scale: _isTapped ? 0.9 : 1.0,
+            scale: isTapped ? 0.9 : 1.0,
             duration: const Duration(milliseconds: 150),
             curve: Curves.easeInOut,
             child: Center( // Add this Center widget

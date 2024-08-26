@@ -9,7 +9,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'location_tracking_menu.dart';
 
 class Body extends StatefulWidget {
-  const Body({Key? key}) : super(key: key);
+  const Body({super.key});
 
   @override
   State<Body> createState() => _BodyState();
@@ -216,11 +216,11 @@ class _BodyState extends State<Body> {
   }
 
   checkStatus() async {
-    bool _permissionGranted = await isPermissionGranted();
-    bool _gpsEnabled = await isGpsEnabled();
+    bool permissionGranted = await isPermissionGranted();
+    bool gpsEnabled = await isGpsEnabled();
     setState(() {
-      permissionGranted = _permissionGranted;
-      gpsEnabled = _gpsEnabled;
+      permissionGranted = permissionGranted;
+      gpsEnabled = gpsEnabled;
     });
   }
 
@@ -242,7 +242,7 @@ class _BodyState extends State<Body> {
   void calculateDistanceAndRoute() {
     if (initialLocation != null && latestLocation != null) {
       // Hitung jarak
-      final distance = const Distance();
+      const distance = Distance();
       distanceBetween = distance(
         LatLng(initialLocation!.latitude!, initialLocation!.longitude!),
         LatLng(latestLocation!.latitude!, latestLocation!.longitude!),

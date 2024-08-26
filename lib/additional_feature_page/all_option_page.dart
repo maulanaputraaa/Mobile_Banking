@@ -13,7 +13,7 @@ class _AllOptionPageState extends State<AllOptionPage> {
 
   Future<void> _handleRefresh() async {
     // Implementasi fungsi refresh di sini
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
   }
 
   @override

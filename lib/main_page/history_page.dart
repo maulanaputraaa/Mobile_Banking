@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../main_page_function/history_function.dart';
 
 class HistoryPage extends StatefulWidget {
+  const HistoryPage({super.key});
+
   @override
   _HistoryPageState createState() => _HistoryPageState();
 }
@@ -49,7 +51,7 @@ class _HistoryPageState extends State<HistoryPage> {
     return Scaffold(
       appBar: buildAppBar(context, onCalendarIconPressed: _selectDateRange),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: RefreshIndicator(

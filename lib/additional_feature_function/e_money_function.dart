@@ -95,6 +95,8 @@ class ConnectItemsWidget extends StatelessWidget {
     {'image': 'assets/icon/shopee_pay_icon.png', 'text': 'Shopee Pay'},
   ];
 
+  ConnectItemsWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -206,7 +208,7 @@ Widget buildBottomAppBar(BuildContext context) {
                     label: 'Home',
                     onTap: () {
                       Navigator.of(context).push(NoAnimationPageRoute(
-                        page: HomePage(),
+                        page: const HomePage(),
                       ));
                     },
                   ),
@@ -217,7 +219,7 @@ Widget buildBottomAppBar(BuildContext context) {
                     label: 'Riwayat',
                     onTap: () {
                       Navigator.of(context).push(NoAnimationPageRoute(
-                        page: HistoryPage(),
+                        page: const HistoryPage(),
                       ));
                     },
                   ),

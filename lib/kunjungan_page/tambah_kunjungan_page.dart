@@ -6,7 +6,7 @@ class TambahKunjunganPage extends StatelessWidget {
 
   Future<void> _handleRefresh() async {
     // Implementasi fungsi refresh di sini
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
   }
 
   @override
@@ -18,8 +18,8 @@ class TambahKunjunganPage extends StatelessWidget {
         child: RefreshIndicator(
           onRefresh: _handleRefresh,
           child: ListView(
-            children: [
-              const SizedBox(height: 30,),
+            children: const [
+              SizedBox(height: 30,),
               AddVisitForm()
             ],
           ),

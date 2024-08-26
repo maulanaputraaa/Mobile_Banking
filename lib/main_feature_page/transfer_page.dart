@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../main_feature_function/transfer_function.dart';// Import file transfer_function.dart
 
 class TransferPage extends StatefulWidget {
+  const TransferPage({super.key});
+
 @override
 _TransferPageState createState() => _TransferPageState();
 }
@@ -9,7 +11,7 @@ _TransferPageState createState() => _TransferPageState();
 class _TransferPageState extends State<TransferPage> {
   Future<void> _handleRefresh() async {
     // Implementasi fungsi refresh di sini
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     setState(() {
       // Update data atau state yang diperlukan
     });

@@ -12,7 +12,7 @@ class HelpPage extends StatefulWidget {
 class _HelpPageState extends State<HelpPage> {
   Future<void> _handleRefresh() async {
     // Implementasi fungsi refresh di sini
-    await Future.delayed(Duration(seconds: 2)); // Simulasi delay untuk refresh
+    await Future.delayed(const Duration(seconds: 2)); // Simulasi delay untuk refresh
 
     // Jika Anda perlu memperbarui data, lakukan di sini
   }
@@ -27,11 +27,11 @@ class _HelpPageState extends State<HelpPage> {
           onRefresh: _handleRefresh,
           child: ListView(
             children: [
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               HelpFunctions.buildSearchBar(),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               HelpFunctions.buildAdditionalSection(),
-              SizedBox(height: 400),
+              const SizedBox(height: 400),
             ],
           ),
         ),

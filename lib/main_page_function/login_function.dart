@@ -29,7 +29,7 @@ class AuthService {
         ),
       );
       return authenticated;
-    } on PlatformException catch (e) {
+    } on PlatformException {
       return false;
     } catch (e) {
       return false;
@@ -188,7 +188,7 @@ Widget loginButton(BuildContext context, TextEditingController emailController, 
             fontSize: 16.0,
           );
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => HomePage()),
+            MaterialPageRoute(builder: (context) => const HomePage()),
           );
         } else {
           Fluttertoast.showToast(
@@ -235,7 +235,7 @@ Widget fingerprintButton(BuildContext context) {
           fontSize: 16.0,
         );
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => const HomePage()),
         );
       } else {
         Fluttertoast.showToast(

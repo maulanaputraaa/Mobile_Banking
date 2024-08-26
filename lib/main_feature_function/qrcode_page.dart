@@ -21,7 +21,7 @@ class _ScanQRPageState extends State<ScanQRPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Scan QR Code'),
+        title: const Text('Scan QR Code'),
       ),
       body: MobileScanner(
         fit: BoxFit.cover,
@@ -67,7 +67,7 @@ class _ScanQRPageState extends State<ScanQRPage> {
 
   Future<bool> _isUrlAccessible(String url) async {
     try {
-      final response = await http.get(Uri.parse(url)).timeout(Duration(seconds: 5));
+      final response = await http.get(Uri.parse(url)).timeout(const Duration(seconds: 5));
       print("Status code dari URL: ${response.statusCode}");
       return response.statusCode == 200;
     } catch (e) {

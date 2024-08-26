@@ -168,7 +168,7 @@ Widget buildListrikOptions(BuildContext context) {
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).push(NoAnimationPageRoute(
-                  page: TokenListrikPage(),
+                  page: const TokenListrikPage(),
                 ));
               },
             ),
@@ -226,7 +226,7 @@ Widget buildBottomAppBar(BuildContext context) {
                     label: 'Home',
                     onTap: () {
                       Navigator.of(context).push(NoAnimationPageRoute(
-                        page: HomePage(),
+                        page: const HomePage(),
                       ));
                     },
                   ),
@@ -237,7 +237,7 @@ Widget buildBottomAppBar(BuildContext context) {
                     label: 'Riwayat',
                     onTap: () {
                       Navigator.of(context).push(NoAnimationPageRoute(
-                        page: HistoryPage(),
+                        page: const HistoryPage(),
                       ));
                     },
                   ),

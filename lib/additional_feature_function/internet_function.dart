@@ -87,7 +87,7 @@ PreferredSizeWidget buildAppBar(BuildContext context) {
 
 // Widget untuk halaman pengecekan tagihan
 class BillCheckPage extends StatefulWidget {
-  const BillCheckPage({Key? key}) : super(key: key);
+  const BillCheckPage({super.key});
 
   @override
   _BillCheckPageState createState() => _BillCheckPageState();
@@ -326,7 +326,7 @@ Widget buildBottomAppBar(BuildContext context) {
                     label: 'Home',
                     onTap: () {
                       Navigator.of(context).push(NoAnimationPageRoute(
-                        page: HomePage(),
+                        page: const HomePage(),
                       ));
                     },
                   ),
@@ -337,7 +337,7 @@ Widget buildBottomAppBar(BuildContext context) {
                     label: 'Riwayat',
                     onTap: () {
                       Navigator.of(context).push(NoAnimationPageRoute(
-                        page: HistoryPage(),
+                        page: const HistoryPage(),
                       ));
                     },
                   ),

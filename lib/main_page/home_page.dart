@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../main_page_function/home_function.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -14,7 +16,7 @@ class _HomePageState extends State<HomePage> {
       _isRefreshing = true;
     });
     // Simulasi proses refresh
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     setState(() {
       _isRefreshing = false;
     });
@@ -30,15 +32,15 @@ class _HomePageState extends State<HomePage> {
           onRefresh: _handleRefresh,
           child: ListView(
             children: [
-              SizedBox(height: 20),
-              BalanceContainer(),
-              SizedBox(height: 30),
+              const SizedBox(height: 20),
+              const BalanceContainer(),
+              const SizedBox(height: 30),
               buildMainFeatureContainers(context),
-              SizedBox(height: 40,),
+              const SizedBox(height: 40,),
               buildSingleFeatureContainer(context),
-              SizedBox(height: 40,),
+              const SizedBox(height: 40,),
               buildAdBanner(context),
-              SizedBox(height: 420,),
+              const SizedBox(height: 420,),
             ],
           ),
         ),

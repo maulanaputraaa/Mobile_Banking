@@ -104,7 +104,7 @@ class RekeningFunctions {
               value,
               style: const TextStyle(color: Colors.grey, fontSize: 16),
             ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           if (showArrow)
             IconButton(
               icon: const Icon(Icons.copy, size: 20),
